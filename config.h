@@ -91,7 +91,7 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 /* Keys */
 #define MODKEY WLR_MODIFIER_LOGO
 
-#define SHCMD(...) { .v = (const char*[]){ "/bin/sh", "-c", __VA_ARGS__, NULL } }
+#define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 static const Key keys[] = {
 	/* Note that Shift changes certain key codes: c -> C, 2 -> at, etc. */
@@ -104,11 +104,12 @@ static const Key keys[] = {
 #define SET_MUTE "wpctl set-mute @DEFAULT_AUDIO_SINK@"
 #define SET_BRIGHTNESS "brightnessctl set"
 
-	{ 0,	                     XKB_KEY_XF86AudioRaiseVolume,       spawn,	SHCMD(SET_VOLUME, "5%+") },
-	{ 0,	                     XKB_KEY_XF86AudioLowerVolume,       spawn,	SHCMD(SET_VOLUME, "5%-") },
-	{ 0,	                     XKB_KEY_XF86AudioMute,      		 spawn,	SHCMD(SET_MUTE, "toggle") },
-	{ 0,	                     XKB_KEY_XF86MonBrightnessUp,      	 spawn,	SHCMD(SET_BRIGHTNESS, "5%+") },
-	{ 0,	                     XKB_KEY_XF86MonBrightnessDown,   	 spawn,	SHCMD(SET_BRIGHTNESS, "5%-") },
+	{ 0,	                     XKB_KEY_XF86AudioRaiseVolume,       spawn,	SHCMD(SET_VOLUME "5%+") },
+	{ 0,	                     XKB_KEY_XF86AudioLowerVolume,       spawn,	SHCMD(SET_VOLUME "5%-") },
+	{ 0,	                     XKB_KEY_XF86AudioMute,      		 spawn,	SHCMD(SET_MUTE "toggle") },
+	{ 0,	                     XKB_KEY_XF86MonBrightnessUp,      	 spawn,	SHCMD(SET_BRIGHTNESS "5%+") },
+	{ 0,	                     XKB_KEY_XF86MonBrightnessDown,   	 spawn,	SHCMD(SET_BRIGHTNESS "5%-") },
+
 
 	{ MODKEY,                    XKB_KEY_j,          focusstack,     {.i = +1} },
 	{ MODKEY,                    XKB_KEY_k,          focusstack,     {.i = -1} },
