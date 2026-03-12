@@ -91,7 +91,7 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 /* Keys */
 #define MODKEY WLR_MODIFIER_LOGO
 
-#define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
+#define SHCMD(...) { .v = (const char*[]){ "/bin/sh", "-c", __VA_ARGS__, NULL } }
 
 static const Key keys[] = {
 	/* Note that Shift changes certain key codes: c -> C, 2 -> at, etc. */
